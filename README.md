@@ -34,3 +34,24 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+
+Build.gradde project
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+Build.graddle app
+
+```
+dependencies {
+    ...
+    implementation 'com.github.dudziks:recyclerview-editor:0.1.0'
+}
+
+```
+
