@@ -54,4 +54,5 @@ dependencies {
 }
 
 ```
+[![](https://jitpack.io/v/dudziks/recyclerview-editor.svg)](https://jitpack.io/#dudziks/recyclerview-editor)
 
