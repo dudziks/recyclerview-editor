@@ -1,5 +1,7 @@
 package com.mdlab.recyclervieweditor
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.CheckBox
@@ -34,6 +36,25 @@ class EditLineViewHolder(private val binding: LineItemBinding, private val store
                 }
                 true
             }
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+                override fun afterTextChanged(s: Editable?) {
+                    if (pos < lines.size) {
+                        // jesli model zawiera \n -> reload
+                        if(lines[pos].hasNL()){
+                            val textStr = lines[pos].text
+                            if (LineTools.isTodo(textStr) || lines[pos].todo != null) {
+                                lines[pos].text = textStr.replace(LineTools.SEP, LineTools.SEP + LineTools.TODO_NOT_DONE)
+                            }
+                            storeDataObj.storeData(pos+1)
+                            posStatus.setPos(pos + 1)
+                        }
+                    }
+                }
+            })
         }
 
         binding.checkBox.setOnClickListener {
@@ -47,11 +68,7 @@ class EditLineViewHolder(private val binding: LineItemBinding, private val store
 
     private fun EditTextK.keyEnterPressed(lines: List<Line>, pos: Int, posStatus: IPositionStatus) {
         val caret = selectionStart
-        var strNewLine = LineTools.SEP
-        val textStr = text.toString()
-        if (LineTools.isTodo(textStr) || lines[pos].todo != null)
-            strNewLine += LineTools.TODO_NOT_DONE
-        text?.replace(caret, caret, strNewLine)
+        text?.replace(caret, caret, LineTools.SEP)
         storeDataObj.storeData(pos + 1)
         posStatus.setPos(pos + 1)
     }

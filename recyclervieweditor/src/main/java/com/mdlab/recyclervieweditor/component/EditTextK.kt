@@ -45,6 +45,7 @@ class EditTextK(
         }
 
         override fun performEditorAction(editorAction: Int): Boolean {
+            Log.d(TAG, "[performEditorAction]: $editorAction")
             processEnterKey(editorAction)
             return false //super.performEditorAction(editorAction)
         }

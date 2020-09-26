@@ -17,15 +17,16 @@
             android:id="@+id/editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@null"
             android:ems="10"
-            android:gravity="start|top"
-            android:inputType="text|textCapSentences"
+            android:imeOptions="normal"
+            android:background="@null"
+            android:inputType="none"
             android:text="@={lineModel.text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="parent" />
+<!--        android:gravity="start|top"-->
 
         <CheckBox
             android:id="@+id/checkBox"

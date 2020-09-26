@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mdlab.recyclervieweditor.databinding.LineItemBinding
 import com.mdlab.recyclervieweditor.model.Line
 
-class EditLineAdapter(private val updater: IWriter, private val positionStatus: IPositionStatus, val scroll: (it: Int) -> Unit):
+class EditLineAdapter(private val updater: IWriter, private val positionStatus: IPositionStatus, val scroll: (it: Int) -> Unit = {}):
     RecyclerView.Adapter<EditLineViewHolder>(),
     IStoreData {
     companion object {        const val TAG = "EditLineAdapter"    }
@@ -45,14 +45,11 @@ class EditLineAdapter(private val updater: IWriter, private val positionStatus: 
         }
     }
 
-    override fun notifyChanged(pos: Int) {
-        notifyItemChanged(pos)
-    }
+    override fun notifyChanged(pos: Int) = notifyItemChanged(pos)
 
-    fun setData(text: String) {
+    fun setData(text: String) =
         _data.run {
             clear()
             addAll( LineTools.stringToLines(text) )
         }
-    }
 }

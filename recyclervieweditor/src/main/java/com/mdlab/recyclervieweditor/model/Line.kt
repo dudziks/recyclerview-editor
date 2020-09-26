@@ -10,4 +10,6 @@ data class Line  (var text: String = "", var todo: Boolean?  = null) {
         }
         append(text)
     }.toString()
+
+    fun hasNL(): Boolean  = text.contains("\n")
 }
