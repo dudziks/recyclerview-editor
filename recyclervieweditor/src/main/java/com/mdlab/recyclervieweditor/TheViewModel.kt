@@ -34,6 +34,7 @@ class TheViewModel: ViewModel(), IPositionStatus, IWriter {
     fun insertTodo() {
         lines.value?.let { linie ->
             val linesList = LineTools.stringToLines(linie)
+            position++
             linesList.add(position, Line("", false))
             write(linesList)
         }
