@@ -29,4 +29,13 @@ class TheViewModel: ViewModel(), IPositionStatus, IWriter {
         val str = LineTools.linesToString(list)
         setData(str)
     }
+
+    // insert todo in next line
+    fun insertTodo() {
+        lines.value?.let { linie ->
+            val linesList = LineTools.stringToLines(linie)
+            linesList.add(position, Line("", false))
+            write(linesList)
+        }
+    }
 }
