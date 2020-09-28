@@ -30,11 +30,14 @@ class EditLineViewHolder(private val binding: LineItemBinding, private val store
                 keyEnterPressed(lines, pos, posStatus)
             }
             setOnKeyListener { v, keyCode, event ->
+                Log.d(TAG, "key pressed")
                 if (event.action == KeyEvent.ACTION_UP && event.keyCode == KeyEvent.KEYCODE_ENTER) {
                     Log.d(TAG, "Enter")
                     keyEnterPressed(lines, pos, posStatus)
+                    true
+                } else {
+                    false
                 }
-                true
             }
             addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -67,6 +70,7 @@ class EditLineViewHolder(private val binding: LineItemBinding, private val store
     }
 
     private fun EditTextK.keyEnterPressed(lines: List<Line>, pos: Int, posStatus: IPositionStatus) {
+        Log.d(TAG, "keyEnterPressed")
         val caret = selectionStart
         text?.replace(caret, caret, LineTools.SEP)
         storeDataObj.storeData(pos + 1)
@@ -74,6 +78,7 @@ class EditLineViewHolder(private val binding: LineItemBinding, private val store
     }
 
     private fun keyDelPressed(keyEvent: KeyEvent, lines: List<Line>, pos: Int, posStatus: IPositionStatus) {
+        Log.d(TAG, "keyDelPressed")
         if (keyEvent.action == KeyEvent.ACTION_UP && keyEvent.keyCode == KeyEvent.KEYCODE_DEL) {
             if (lines[pos].todo != null) {
                 lines[pos].todo = null
